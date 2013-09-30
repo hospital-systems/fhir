@@ -51,8 +51,12 @@ class Fhir::CodeSystem
       display: "HL7 v3 NULL Flavor",
       oid: "2.16.840.1.113883.5.1008",
       uri: 'http://hl7.org/fhir/v3/NullFlavor'
+    }, {
+      symbolic: :nci,
+      display: "NCI Thesaurus",
+      oid: "2.16.840.1.113883.3.26.1.1",
+      uri: 'http://ncit.nci.nih.gov/'
     },
-
 
     # for tests
     {
