@@ -3,11 +3,12 @@ class Fhir::ResourceReference < Fhir::DataType
   attribute :reference, String
   attribute :display, String
 
-  def initialize(attributes = {})
-    @instance = attributes.delete(:instance)
-    @container = attributes.delete(:container)
+  def self.build(resource_class, uuid)
+    new(type: resource_class.name, reference: "#{resource_class.name.demodulize}/#{uuid}")
+  end
 
-    super(attributes)
+  def self.for(resource)
+    build(resource.class, resource.uuid)
   end
 
   def reference

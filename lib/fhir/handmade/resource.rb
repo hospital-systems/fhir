@@ -8,7 +8,7 @@ class Fhir::Resource < Fhir::Type
 
   # Unique Resource Identifier
   def uri
-    Fhir::URI.new("#{self.class.name.tableize}/#{self.uuid}")
+    @uri ||= to_ref.reference
   end
 
   # Additional Content defined by implementations
@@ -46,10 +46,7 @@ class Fhir::Resource < Fhir::Type
     @independent = false
   end
 
-  def to_ref(container = nil)
-    Fhir::ResourceReference.new(type: self.class.name,
-                                reference: self.uri,
-                                container: container,
-                                instance: self)
+  def to_ref
+    Fhir::ResourceReference.for(self)
   end
 end

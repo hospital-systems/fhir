@@ -162,7 +162,7 @@ class Fhir::Type
     define_method "#{attribute_name}=" do |value|
       super(value)
       assigned_resource = send(attribute_name)
-      send("#{attribute_name}_ref=", assigned_resource.to_ref(self)) if assigned_resource
+      send("#{attribute_name}_ref=", assigned_resource.to_ref) if assigned_resource
     end
   end
 
@@ -175,7 +175,7 @@ class Fhir::Type
       super(values)
 
       assigned_resources = send(attribute_name)
-      send("#{ref_attr_name}=", assigned_resources.map { |s| s.nil? ? nil : s.to_ref(self) }.compact)
+      send("#{ref_attr_name}=", assigned_resources.map { |s| s.nil? ? nil : s.to_ref }.compact)
     end
   end
 
