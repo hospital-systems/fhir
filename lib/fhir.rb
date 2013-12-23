@@ -17,6 +17,8 @@ module Fhir
   autoload :ResourceReference, 'fhir/handmade/resource_reference'
   autoload :Resource,          'fhir/handmade/resource'
   autoload :Money,             'fhir/handmade/money'
+  autoload :Age,               'fhir/handmade/age'
+
   autoload :Binary,            'fhir/handmade/binary'
 
   autoload :Virtus,            'fhir/virtus'
