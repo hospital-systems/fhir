@@ -10,7 +10,7 @@ class Fhir::Composition < Fhir::Resource
     validates_presence_of :status
     validates_presence_of :confidentiality
     validates_presence_of :subject_ref
-    validates_presence_of :author_ref
+    validates_presence_of :author_refs
   end
 
   # Extensions that cannot be ignored

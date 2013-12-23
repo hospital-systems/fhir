@@ -1,7 +1,7 @@
 # A request to perform an action.
 class Fhir::Order < Fhir::Resource
   invariants do
-    validates_presence_of :detail_ref
+    validates_presence_of :detail_refs
   end
 
   # Extensions that cannot be ignored

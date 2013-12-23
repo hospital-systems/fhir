@@ -14,10 +14,9 @@ describe 'AllergyIntolerance' do
       },
       substance: {
         _type: "Fhir::Substance",
-        name: 'substance name',
         type: {
           text: 'aspirin',
-          codings: [
+          coding: [
             {
               system: 'RxNorm',
               code: '123456',
@@ -27,16 +26,12 @@ describe 'AllergyIntolerance' do
         },
         description: 'substance description',
         status: { text: 'active' },
-        effective_time: {
-          start: Time.now,
-          end: Time.now
-        }
       },
-      reactions: [{
+      reaction: [{
         _type: "Fhir::AdverseReaction",
         reaction_date: Time.now,
         did_not_occur_flag: false,
-        symptoms: [{
+        symptom: [{
           code: {text: 'pain'},
           severity: 'over 9000'
         }],
@@ -45,7 +40,7 @@ describe 'AllergyIntolerance' do
             type: 'Patient',
             reference: 'patient/@3123123'
           },
-        exposures: [{
+        exposure: [{
           exposure_date: Time.now,
           exposure_type: 'exposure type',
           causality_expectation: 'expectation code',
@@ -58,6 +53,6 @@ describe 'AllergyIntolerance' do
     allergy.criticality.should == 'fatal'
     allergy.sensitivity_type.should == 'allergy'
     allergy.status.should == 'status'
-    allergy.substance.type.codings.first.system.should == 'RxNorm'
+    allergy.substance.type.coding.first.system.should == 'RxNorm'
   end
 end

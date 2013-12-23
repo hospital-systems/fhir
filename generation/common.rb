@@ -248,7 +248,7 @@ module RubyCodeGeneration
 
   def reference_name(node)
     attr_name = attribute_name(node)
-    "#{attr_name}_ref"
+    "#{attr_name}_ref" + (is_collection?(node) ? 's' : '')
   end
 
   def attribute_validation(node, attr_name)

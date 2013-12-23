@@ -2,9 +2,9 @@
 class Fhir::DocumentManifest < Fhir::Resource
   invariants do
     validates_presence_of :master_identifier
-    validates_presence_of :subject_ref
+    validates_presence_of :subject_refs
     validates_presence_of :status
-    validates_presence_of :content_ref
+    validates_presence_of :content_refs
   end
 
   # Extensions that cannot be ignored

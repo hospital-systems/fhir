@@ -24,7 +24,7 @@ describe 'ResourceAttribute' do
                          prop1: 'val1'
                        })
 
-    res.subject.is_a?(Res1)
+    res.subject.should be_a(Res1)
     res.subject.prop1.should == 'val1'
     res.subject_ref.should_not be_nil
     res.subject_ref.type.should == 'Res1'

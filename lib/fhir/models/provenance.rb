@@ -7,7 +7,7 @@
 # significance.
 class Fhir::Provenance < Fhir::Resource
   invariants do
-    validates_presence_of :target_ref
+    validates_presence_of :target_refs
     validates_presence_of :recorded
   end
 

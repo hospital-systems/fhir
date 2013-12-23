@@ -12,6 +12,9 @@ PATH
   remote: .
   specs:
     fhir (0.0.1)
+      activemodel
+      activesupport
+      virtus
 
 GEM
   remote: https://rubygems.org/

@@ -6,7 +6,7 @@ describe "Observation full stack example" do
       uuid: "f4aa62b0-c662-4285-b9fe-67c1def6391d",
       name:
       {
-        codings: [
+        coding: [
           {
             system: "http://snomed.info/id",
             code: "387458008",
@@ -26,7 +26,7 @@ describe "Observation full stack example" do
         _type: "Fhir::Quantity"
       },
       interpretation: {
-        codings: [
+        coding: [
           {
             system: "http://hl7.org/fhir/vs/observation-interpretation",
             code: "L",
@@ -57,7 +57,7 @@ describe "Observation full stack example" do
         use: nil,
         label: nil,
         system: "medapp_observations",
-        key: "02186030-1179-0131-fe0e-1c6f65c378d6",
+        value: "02186030-1179-0131-fe0e-1c6f65c378d6",
         period: nil,
         assigner: nil,
         assigner_ref: nil,

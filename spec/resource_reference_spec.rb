@@ -2,10 +2,21 @@ require 'spec_helper'
 
 describe "Resource References: inline and external" do
   it "should allow to inline resources" do
-    patient = Fhir::Patient.new(names: [{ givens: ["Alexey", "Pivovarov"] }])
+    patient = Fhir::Patient.new(name: [{ given: ["Alexey", "Pivovarov"] }])
     patient.independent!
 
-    substance = Fhir::Substance.new(name: "cats")
+    substance = Fhir::Substance.new(
+        type: {
+            text: 'aspirin',
+            coding: [
+                {
+                    system: 'RxNorm',
+                    code: '123456',
+                    display: 'aspirin'
+                }
+            ]
+        }
+    )
     substance.should be_contained
     substance.should_not be_independent
 

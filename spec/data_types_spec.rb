@@ -5,7 +5,7 @@ describe "Datatypes" do
     address = Fhir::Address.new(
       use: 'blah',
       text: ['f safsad','f sadf sad'],
-      lines: ['Spb'],
+      line: ['Spb'],
       city: 'Omsk'
     )
 

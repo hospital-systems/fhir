@@ -4,7 +4,7 @@ class Fhir::DocumentReference < Fhir::Resource
     validates_presence_of :master_identifier
     validates_presence_of :subject_ref
     validates_presence_of :type
-    validates_presence_of :author_ref
+    validates_presence_of :author_refs
     validates_presence_of :indexed
     validates_presence_of :status
     validates_presence_of :mime_type
