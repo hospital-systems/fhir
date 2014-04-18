@@ -16,7 +16,7 @@ module Fhir::Virtus
         klass.new(value)
       else
         coerced_value = coerce_according_to_types(value)
-        check_type!(coerced_value.class, value)
+        check_type!(coerced_value.class, coerced_value)
         coerced_value
       end
     end
@@ -24,11 +24,17 @@ module Fhir::Virtus
     private
 
     def virtus_coerce(type, value)
-      method = "to_#{type.name.downcase}"
+      method = "to_#{type.name.demodulize.downcase}"
+
       coercer = Virtus.coercer[value.class]
 
       if coercer.respond_to?(method)
-        coercer.public_send(method, value)
+        begin
+          coercer.public_send(method, value)
+        rescue Coercible::UnsupportedCoercion
+        end
+      elsif is_boolean_type(type, value)
+        value
       end
     end
 
@@ -43,7 +49,7 @@ module Fhir::Virtus
         allowed_types.each do |type|
           result = virtus_coerce(type, value)
 
-          if !result.nil? && result.class <= type
+          if !result.nil? && (result.class <= type || is_boolean_type(type, result))
             break
           end
         end
@@ -57,9 +63,13 @@ module Fhir::Virtus
     end
 
     def check_type!(klass, value)
-      if klass != NilClass && !allowed_types.any? { |t| klass <= t }
+      if klass != NilClass && !allowed_types.any? { |t| klass <= t || is_boolean_type(t, value)}
         raise ArgumentError.new("Unexpected value with type #{klass.name}, expected one of: #{allowed_types.inspect}\n#{value.to_yaml}")
       end
+    end
+
+    def is_boolean_type(klass, value)
+      klass == Virtus::Attribute::Boolean && [TrueClass, FalseClass].include?(value.class)
     end
   end
 end
