@@ -27,6 +27,11 @@ describe 'Fhir::Virtus::Coercer' do
     attribute :values, *Fhir::Collection[Float, Quantity, Coding]
   end
 
+  class Patient
+    include Virtus.model
+    attribute :multiple_birth, *Fhir::Type[Boolean, Integer]
+  end
+
   it "hash in constructor"  do
     obs = Observation.new(name: "BP",
                           value: {
@@ -73,5 +78,23 @@ describe 'Fhir::Virtus::Coercer' do
 
     obs.values.third.class.should == Coding
     obs.values.third.code.should == "34521"
+  end
+
+  it "should support multitype arrays that contain Booleans" do
+    pat_bool = Patient.new(multiple_birth: true)
+    pat_bool.multiple_birth.should == true
+    pat_bool.multiple_birth.class.should == TrueClass
+
+    pat_bool.multiple_birth = "false"
+    pat_bool.multiple_birth.should == false
+    pat_bool.multiple_birth.class.should == FalseClass
+
+    pat_int = Patient.new(multiple_birth: 2)
+    pat_int.multiple_birth.should == 2
+    pat_int.multiple_birth.should be_an Integer
+
+    pat_int.multiple_birth = "3"
+    pat_int.multiple_birth.should == 3
+    pat_int.multiple_birth.should be_an Integer
   end
 end
